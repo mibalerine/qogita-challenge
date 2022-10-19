@@ -37,15 +37,22 @@ export const useCart = () => {
         }
     }
 
-    const removeFromCart = (item: Product) => {
-        const newCart = cart.filter(prod => prod.gtin !== item.gtin);
+    const removeFromCart = (gtin: string) => {
+        const newCart: CartProduct[] = cart.filter(prod => prod.gtin !== gtin);
         cartStore.set(newCart);
+    }
+
+    const setProductQuantity = (item: CartProduct) => {
+        const itemIdxInCart: number = cart.findIndex(prod => prod.gtin === item.gtin);
+        cart[itemIdxInCart].quantity = item.quantity;
+        cartStore.set(cart);
     }
 
   const actions = useMemo(() => {
     return {
       addToCart: addToCart, 
-      removeFromCart: removeFromCart
+      removeFromCart: removeFromCart,
+      setProductQuantity: setProductQuantity
     }
   }, [cart])
 
