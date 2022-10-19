@@ -5,7 +5,6 @@ type Props = {
     item: ProductType;
 };
 
-
 const Product = ({ item }: Props) => {
     const { actions } = useCart();
 
@@ -26,5 +25,5 @@ const Product = ({ item }: Props) => {
   );
 };
   
-  export default Product;
+export default Product;
   
