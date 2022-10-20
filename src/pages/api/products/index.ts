@@ -3,10 +3,10 @@ import products from '../../../../data/products.json';
 import { ErrorResponse, Product, ProductsResponse } from '../../../types';
 
 type GetPage = (page: number) => Product[];
+export const SIZE = 20;
 
 const getPage: GetPage = (page) => {
   if (page < 1) return [];
-  const SIZE = 20;
   const startIndex = page * SIZE - SIZE;
   const endIndex = startIndex + SIZE;
   return products.slice(startIndex, endIndex);
