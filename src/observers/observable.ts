@@ -18,7 +18,7 @@ class Observable<T> {
     subscribe(subscriber: Subscriber<T>): () => void {
         this.subscribers.add(subscriber);
 
-        return () => this.unsubscribe(subscriber); // will be used inside React.useEffect
+        return () => this.unsubscribe(subscriber);
     }
 
     unsubscribe(subscriber: Subscriber<T>): void {
