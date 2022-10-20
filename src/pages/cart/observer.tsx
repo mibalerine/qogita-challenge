@@ -9,6 +9,9 @@ export interface CartProduct extends Product {
 export const cartStore = new Observable<CartProduct[]>([]);
 
 export const useCart = () => {
+  // FIXME: Change cart from array to object
+  // It's easier to interact with elements by key instead of iterating through them to find index
+  // and it would perform better when dealing with bigger amount of products.
   const [cart, setCart] = useState<CartProduct[]>(cartStore.get());
 
   useEffect(() => {
@@ -21,7 +24,7 @@ export const useCart = () => {
     const idxExistingItem = productsIds.indexOf(item.gtin);
 
     if (idxExistingItem !== -1) {
-      //product already exists in cart. increment quantity.
+      // product already exists in cart. increment quantity.
 
       let existingProduct = cart[idxExistingItem];
       if (existingProduct.quantity == undefined) {
@@ -31,7 +34,7 @@ export const useCart = () => {
       existingProduct.quantity++;
       cartStore.set(cart);
     } else {
-      //new product to cart. add to cart with quantity = 1.
+      // new product to cart. add to cart with quantity = 1.
       item.quantity = 1;
       cartStore.set([...cart, item]);
     }

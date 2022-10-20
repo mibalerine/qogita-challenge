@@ -1,3 +1,59 @@
+### Challenge Requirements
+
+#### Home page
+
+- [x] Display products retrieved from the `/products` endpoint.
+- [x] Customers should be able to browse all available products (there are 100 in total).
+- [x] Customers should be able to add products to a shopping cart.
+
+#### Cart page
+
+- [x] Display the products the customer has added to their shopping cart.
+- [x] Customers should be able to remove products from their shopping cart.
+- [x] The shopping cart's value should be prominently displayed.
+
+##### Bonus requirements
+
+- [x] Customers should be able to change the quantity of a particular product in their shopping cart.
+
+---
+
+## Personal Notes
+
+### Improvements
+
+#### Design & UX
+
+_Design_: Usually the design comes pre-defined from the Designers. With that in mind, I didn't style the UI elements myself, I copied the style from some snippets found in flowbite.com.
+
+_UX_: With more time I would make some tweaks...
+
+- Implementation of loaders.
+- Better feedbacks while interacting with buttons, specially after the `add to cart`. Right now the only feedback you have is the `counter` at the top, increasing as I add more products.
+- On the `cart` page, when quantity of a product is zero, I could remove it from the cart automatically or avoid it from dropping to 0.
+
+#### Unit Tests
+
+I thought I would have time to explore `jest` and I was excited about it, but I decided to focus on the requirements. I know how important writing tests are for the continuitity and long-term success of the product.
+
+#### I18n
+
+Most web projects are internationalised. It not only avoids having hard coded strings on your project but also makes it easier when you want to release it into multiple countries.
+
+#### Material UI or Styled Components
+
+Currently the classes are pretty verbose and hard to read. I would have liked to use something like Material UI or Styled Components to improve readability and reusability.
+
+#### Serverside Rendering
+
+Knowing that we are using Next.js, it would have been nice to explore more of ServerSide rendering and its benefits.
+
+#### Responsiveness
+
+The pages are responsive, however, there are many customizations and optimizations to make in order to improve the usability.
+
+---
+
 # Qogita's Front-End Technical Challenge.
 
 Congratulations on reaching the technical challenge stage of the interview process at Qogita.
