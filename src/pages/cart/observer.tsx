@@ -42,17 +42,19 @@ export const useCart = () => {
         cartStore.set(newCart);
     }
 
-    const setProductQuantity = (item: CartProduct) => {
+    const setProduct = (item: CartProduct) => {
         const itemIdxInCart: number = cart.findIndex(prod => prod.gtin === item.gtin);
-        cart[itemIdxInCart].quantity = item.quantity;
-        cartStore.set(cart);
+        const tempCart = [...cart];
+
+        tempCart[itemIdxInCart] = item;
+        cartStore.set(tempCart);
     }
 
   const actions = useMemo(() => {
     return {
       addToCart, 
       removeFromCart,
-      setProductQuantity
+      setProduct
     }
   }, [cart])
 
