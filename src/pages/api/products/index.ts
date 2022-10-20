@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import products from '../../../../data/products.json';
-import { ErrorResponse, Product, ProductsResponse } from '../../../types';
+import type { NextApiRequest, NextApiResponse } from "next";
+import products from "../../../../data/products.json";
+import { ErrorResponse, Product, ProductsResponse } from "../../../types";
 
 type GetPage = (page: number) => Product[];
 export const SIZE = 20;
@@ -14,19 +14,19 @@ const getPage: GetPage = (page) => {
 
 const handler = (
   request: NextApiRequest,
-  response: NextApiResponse<ProductsResponse | ErrorResponse>,
+  response: NextApiResponse<ProductsResponse | ErrorResponse>
 ): void => {
   const { method, query } = request;
   const { status } = response;
 
   switch (method) {
-    case 'GET': {
+    case "GET": {
       const stringifiedPage = Array.isArray(query.page)
-        ? query.page.join('')
+        ? query.page.join("")
         : query.page;
       const pageNum = Number(stringifiedPage ?? 1);
       if (isNaN(pageNum) || pageNum < 1) {
-        status(400).send('Bad Request');
+        status(400).send("Bad Request");
       } else {
         status(200).json({
           count: 100,
@@ -38,7 +38,7 @@ const handler = (
     }
 
     default:
-      status(405).send('Method Not Allowed');
+      status(405).send("Method Not Allowed");
       break;
   }
 };
