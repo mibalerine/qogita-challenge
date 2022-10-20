@@ -50,9 +50,9 @@ export const useCart = () => {
 
   const actions = useMemo(() => {
     return {
-      addToCart: addToCart, 
-      removeFromCart: removeFromCart,
-      setProductQuantity: setProductQuantity
+      addToCart, 
+      removeFromCart,
+      setProductQuantity
     }
   }, [cart])
 
