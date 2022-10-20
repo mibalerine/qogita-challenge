@@ -4,21 +4,22 @@ import Product from '../components/Product/Product';
 import type { Product as ProductType, ProductsResponse } from '../types';
 import { getProducts } from '../services/products';
 import Pagination from '../components/Pagination/Pagination';
+import { paginationStore, usePagination } from './homepage/paginationObserver';
+import { SIZE } from './api/products';
 
-const HomePage = ({productsResponse: products}) => {
-  // const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
-
-  // if (products) {
-    // setProductsResponse(products)
-  // }
-  let pageNum: number = 1;
-
-  // useEffect(()=>{    
-  //   getProducts(pageNum)
-  //     .then((res: ProductsResponse) => setProductsResponse(res))
-  // }, []);
+const HomePage = () => {
+  const [productsResponse, setProductsResponse] = useState<ProductsResponse>({count: 0, page: 1, results: []});
+  const pagination = usePagination();
   
-  const listItems = products?.results.map((product: ProductType) => 
+  useEffect(()=>{    
+    getProducts(pagination.state.pageNum)
+      .then((res: ProductsResponse) => {
+        setProductsResponse(res);
+        pagination.actions.calculateTotalPages(res.count);
+      })
+  }, [pagination.state.pageNum]);
+  
+  const listItems = (productsResponse.results ?? []).map((product: ProductType) => 
     <Product item={product} key={product.gtin}></Product>
   );
 
@@ -26,13 +27,13 @@ const HomePage = ({productsResponse: products}) => {
     <h1 className="font-medium leading-tight text-4xl mt-0 mb-2">Products</h1>
     <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">{listItems}</div>
 
-    <Pagination pageNum={pageNum}></Pagination>
+    <Pagination/>
   </Layout>);
 };
 
-//Server-side rendering: Nextjs pre-renders the page - prevents slow client-side rendering
-export async function getServerSideProps() {
-  return { props: {productsResponse: (await getProducts())} }
-}
+//TODO: Server-side rendering: Nextjs pre-renders the page - prevents slow client-side rendering
+// export async function getServerSideProps() {
+//   return { props: {serverSideProducts: (await getProducts())} }
+// }
 
 export default HomePage;
